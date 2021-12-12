@@ -9,7 +9,7 @@ abstract class UserState extends Equatable {
 }
 
 class UserInitial extends UserState {
-  UserInitial() : super(User(name: 'No Name', age: 0));
+  UserInitial() : super(User(name: 'No Name', age: '0',  email:'No Email'));
 }
 
 class UserLoaded extends UserState {

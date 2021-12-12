@@ -12,4 +12,12 @@ class ChangeNameEvent extends UserEvent {
   ChangeNameEvent(this.name);
 }
 
-class BirthdayEvent extends UserEvent {}
+class ChangeBirthdayEvent extends UserEvent {
+  final String age;
+  ChangeBirthdayEvent(this.age);
+}
+
+class ChangeEmailEvent extends UserEvent {
+  final String email;
+  ChangeEmailEvent(this.email);
+}

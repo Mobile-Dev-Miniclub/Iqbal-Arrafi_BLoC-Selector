@@ -12,11 +12,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     UserEvent event,
   ) async* {
     if (event is ChangeNameEvent) {
-      //user baru yg da di event dan umurnya itu sama dgn state sebelumnya
-      yield UserLoaded(User(name: event.name, age: state.user.age));
-    } else if (event is BirthdayEvent) {
-      //usernya sama dgn sebelumnya, umurnya yg diubah
-      yield UserLoaded(User(name: state.user.name, age: state.user.age + 1));
+      yield UserLoaded(User(name: event.name, age: state.user.age, email: state.user.email));
+    } else if (event is ChangeBirthdayEvent) {
+      yield UserLoaded(User(name: state.user.name, age: event.age, email: state.user.email));
+    } else if (event is ChangeEmailEvent) {
+      yield UserLoaded(User(name: state.user.name, age: state.user.age, email: event.email));
     }
   }
 }

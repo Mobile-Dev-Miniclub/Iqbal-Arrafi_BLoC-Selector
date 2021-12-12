@@ -30,42 +30,106 @@ class MainPage extends StatelessWidget {
                 print("refresh title");
                 return Text("Welcome $name");
               })),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            BlocBuilder<UserBloc, UserState>(builder: (context, state) {
-              print("refresh body");
-              return Text(
-                  "Hi many name is ${state.user.name} and my age ${state.user.age} year old");
-            }),
-            SizedBox(
-              height: 40,
-            ),
-            Container(
-              margin: EdgeInsets.all(16),
-              child: TextField(
-                controller: controller,
-                decoration: InputDecoration(
-                    fillColor: Colors.lightBlue,
-                    filled: true,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10))),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+                print("refresh body");
+                return Column(
+                  children: [
+                    Text("Nama: ${state.user.name}"),
+                    Text("Umur: ${state.user.age}"),
+                    Text("Email: ${state.user.email}"),
+                  ],
+                );
+              }),
+              SizedBox(
+                height: 40,
               ),
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  context.read<UserBloc>().add(BirthdayEvent());
-                },
-                child: Text("Birthday")),
-            ElevatedButton(
+              Container(
+                child: TextField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                      fillColor: Colors.blue[100],
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                ),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(13),
+                    ),
+                  ),
+                ),
                 onPressed: () {
                   context
                       .read<UserBloc>()
                       .add(ChangeNameEvent(controller.text));
                 },
-                child: Text("Change name"))
-          ],
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  alignment: Alignment.center,
+                  height: 50,
+                  child: Text(
+                    "Change Name",
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(13),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  context
+                      .read<UserBloc>()
+                      .add(ChangeBirthdayEvent(controller.text));
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  alignment: Alignment.center,
+                  height: 50,
+                  child: Text(
+                    "Change Birthday",
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(13),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  context
+                      .read<UserBloc>()
+                      .add(ChangeEmailEvent(controller.text));
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  child: Text(
+                    "Change Email",
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
